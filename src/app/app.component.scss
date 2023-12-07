@@ -1,0 +1,12 @@
+:host {
+    .countdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10rem;
+
+        .remaining-time {
+            font-size: 2rem;
+        }
+    }
+}
