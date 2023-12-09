@@ -1,4 +1,4 @@
-<div class="base-timer">
+<div class="base-timer" [style.width]="size + 'px'" [style.height]="size + 'px'">
     <svg [attr.viewBox]="'0 0 ' + size + ' ' + size" [attr.width]="size" [attr.height]="size" xmlns="http://www.w3.org/2000/svg">
         <path [attr.d]="pathOptions.path" fill="none" stroke='#d9d9d9' [attr.stroke-width]="strokeWidth"></path>
 
