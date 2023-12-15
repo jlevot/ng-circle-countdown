@@ -1,30 +1,51 @@
-import { Injectable } from '@angular/core';
-import { interval, map, Observable, Subject } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { computed, effect, Injectable, signal } from '@angular/core';
+import { CountDown } from '../model/countdown';
+
+const DEFAULT_COUNTER: CountDown = {
+    isActive: false,
+    isCompleted: false,
+    speed: 10,
+    diff: 10,
+    remainingTime: 0
+};
 
 @Injectable({
     providedIn: 'root'
 })
 export class CountdownService {
-    private countdownTimer$: Observable<number> = new Observable<number>();
-    private countdownSubject: Subject<void>;
+    private counter = signal(DEFAULT_COUNTER);
+    private isActive = computed(() => this.counter().isActive);
+
+    private interval = 0;
 
     constructor() {
-        this.countdownSubject = new Subject<void>();
+        effect(() => this.tick(this.isActive()));
     }
 
-    public startCountdown(duration: number): Observable<number> {
-        const intervalDuration = 10;
+    public start = () => this.counter.update((v) => ({ ...v, isActive: true }))
 
-        this.countdownTimer$ = interval(intervalDuration).pipe(
-            map(time => duration - (time * intervalDuration)),
-            takeWhile(time => time >= 0)
-        );
+    public stop = () => this.counter.update((v) => ({ ...v, isActive: false }));
 
-        return this.countdownTimer$;
-    }
+    public reset = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime }));
 
-    stopCountdown(): void {
-        this.countdownSubject.next();
+    public setRemainingTime = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime }));
+
+    getCounter = () => {
+        return this.counter.asReadonly()
+    };
+
+    private tick(isActive: boolean) {
+        clearInterval(this.interval);
+        if (isActive && this.counter().remainingTime !== 0) {
+            this.interval = setInterval(
+                () => this.counter.update((c) => (
+                    {
+                        ...c,
+                        remainingTime: c.remainingTime - this.counter().diff,
+                        isCompleted: (c.remainingTime - this.counter().diff) === 0
+                    })),
+                this.counter().speed
+            );
+        }
     }
 }

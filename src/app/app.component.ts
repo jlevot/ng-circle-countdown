@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, inject, Signal } from '@angular/core';
+import { CountdownService } from '../../projects/ng-circle-countdown/src/services/countdown.service';
+import { CountDown } from '../../projects/ng-circle-countdown/src/model/countdown';
 
 @Component({
     selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
     styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-    public duration: number = 10 * 1000;
+    protected countdownService = inject(CountdownService);
+
+    public countDown: Signal<CountDown> = this.countdownService.getCounter();
+    public isCompleted: Signal<boolean> = computed(() => this.countDown().isCompleted);
+
+    completed = effect(() => {
+        console.log(this.isCompleted());
+    })
 }

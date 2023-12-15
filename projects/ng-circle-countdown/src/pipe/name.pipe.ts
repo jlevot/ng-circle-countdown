@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SeamanNamePipe implements PipeTransform {
     transform(time: number) {
-        return Math.round(time);
+        return Math.round(time / 1000);
     }
 }

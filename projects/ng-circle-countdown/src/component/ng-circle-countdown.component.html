@@ -2,9 +2,9 @@
     <svg [attr.viewBox]="'0 0 ' + size + ' ' + size" [attr.width]="size" [attr.height]="size" xmlns="http://www.w3.org/2000/svg">
         <path [attr.d]="pathOptions.path" fill="none" stroke='#d9d9d9' [attr.stroke-width]="strokeWidth"></path>
 
-        <path [style.stroke]="currentColor"
+        <path [style.stroke]="countDownData().currentColor"
               [attr.stroke-width]="strokeWidth"
-              [attr.stroke-dashoffset]="offset"
+              [attr.stroke-dashoffset]="countDownData().offset"
               [attr.d]="pathOptions.path"
               [attr.stroke-dasharray]="pathOptions.length"
               stroke-linecap="round"
@@ -12,7 +12,9 @@
         </path>
     </svg>
 
-    <div class="time" [style.color]="currentColor">
-        <ng-container *ngTemplateOutlet="counterTemplate;context:{ $implicit: {value: remainingTime | format_time, color: currentColor } }"></ng-container>
+    <div class="time" [style.color]="countDownData().currentColor">
+        <ng-container *ngTemplateOutlet="counterTemplate;
+                        context:{ $implicit: {value: countDown().remainingTime | format_time, color: countDownData().currentColor } }">
+        </ng-container>
     </div>
 </div>

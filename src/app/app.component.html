@@ -1,25 +1,25 @@
 <div class="countdown-container">
     <div style="display: flex; gap: 1rem">
-        <ng-circle-countdown #timer [duration]="duration" (onComplete)="timer.start()" [strokeWidth]="7">
-            <ng-template #counter let-counter>
-                <span class="remaining-time" [style.color]="counter.color">{{counter.value}}</span>
-            </ng-template>
-        </ng-circle-countdown>
+        <!--        <ng-circle-countdown #timer [duration]="duration" [strokeWidth]="7">-->
+        <!--            <ng-template #counter let-counter>-->
+        <!--                <span class="remaining-time" [style.color]="counter.color">{{ counter.value }}</span>-->
+        <!--            </ng-template>-->
+        <!--        </ng-circle-countdown>-->
 
         <ng-circle-countdown
-            #timer_color
+            #timer
             [duration]="10000"
             [colors]="[ '#004777', '#F7B801', '#A30000', '#A30000' ]"
             [colorsTime]="[ 7, 5, 2, 0 ]">
             <ng-template #counter let-counter>
-                <span class="remaining-time" [style.color]="counter.color">{{counter.value}}</span>
+                <span class="remaining-time" [style.color]="counter.color">{{ counter.value }}</span>
             </ng-template>
         </ng-circle-countdown>
     </div>
 
     <div class="controls" style="margin-top:10rem">
-        <button type="button" (click)="timer.start(); timer_color.start()">Start</button>
+        <button type="button" (click)="timer.start()">Start</button>
         <button type="button" (click)="timer.pause()">Pause</button>
-        <button type="button" (click)="timer.continue()">Continue</button>
+        <button type="button" (click)="timer.reload()">Reload</button>
     </div>
 </div>

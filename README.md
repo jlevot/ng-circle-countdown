@@ -45,6 +45,13 @@ You can use it by this way:
 </div>
 ```
 
+To catch the onComplete countDown event, you have to import the `CountdownService` and use a `compute` on the `isCompleted` property:
+
+```html
+public isCompleted: Signal
+<boolean> = computed(() => this.countDown().isCompleted);
+```
+
 You can choose to use a formControl or just a formControlName. It depends on your needs.
 
 ## Options
@@ -58,7 +65,6 @@ You can choose to use a formControl or just a formControlName. It depends on you
 | strokeWidth | `number`        | `6`         | Line thickness countdown                                                          |
 | size        | `number`        | `None`      | Define the component size to match with your UI                                   |
 | rotation    | `RotationType ` | `clockwise` | Direction of the countdown rotation                                               |
-| onComplete  | `Event`         | `None`      | Emit an event to prevent the user countdown is over                               |
 
 You can choose to set only one color to the countdown, so you just have to set the color property.
 
