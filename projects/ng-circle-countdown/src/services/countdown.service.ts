@@ -26,8 +26,6 @@ export class CountdownService {
 
     public stop = () => this.counter.update((v) => ({ ...v, isActive: false }));
 
-    public reset = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime }));
-
     public setRemainingTime = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime }));
 
     getCounter = () => {
