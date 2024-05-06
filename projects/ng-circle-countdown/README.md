@@ -8,9 +8,10 @@ An Angular package for displaying a circle countdown fully configurable.
 
 **Compatibility:**
 
-| Angular |
-|---------|
-| 16.x.x  |
+| Angular | Angular |
+|---------|---------|
+| 16.x.x  | 1.0.3   |
+| 17.x.x  | 2.0.0   |
 
 ## Installation
 
