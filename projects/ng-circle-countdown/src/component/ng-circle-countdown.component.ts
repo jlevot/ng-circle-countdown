@@ -53,7 +53,7 @@ export class CircleCountdownComponent implements OnChanges {
     }
 
     public reload(): void {
-        this.countdownService.setRemainingTime(this.duration)
+        this.countdownService.resetCounter(this.duration)
         this.start();
     }
 

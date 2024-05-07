@@ -28,6 +28,8 @@ export class CountdownService {
 
     public setRemainingTime = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime }));
 
+    public resetCounter = (remainingTime: number) => this.counter.update((c: CountDown) => ({ ...c, remainingTime, isCompleted: false }));
+
     getCounter = () => {
         return this.counter.asReadonly()
     };
