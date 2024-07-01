@@ -1,11 +1,11 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { CountDown } from '../model/countdown';
+import { clearInterval, setInterval } from 'worker-timers';
 
 const DEFAULT_COUNTER: CountDown = {
     isActive: false,
     isCompleted: false,
-    speed: 10,
-    diff: 10,
+    speed: 1000,
     remainingTime: 0
 };
 
@@ -38,12 +38,12 @@ export class CountdownService {
         clearInterval(this.interval);
         if (isActive && this.counter().remainingTime !== 0) {
             this.interval = setInterval(
-                () => this.counter.update((c) => (
-                    {
-                        ...c,
-                        remainingTime: c.remainingTime - this.counter().diff,
-                        isCompleted: (c.remainingTime - this.counter().diff) === 0
-                    })),
+                () =>
+                    this.counter.set({
+                        ...this.counter(),
+                        remainingTime: this.counter().remainingTime - this.counter().speed,
+                        isCompleted: (this.counter().remainingTime - this.counter().speed) === 0
+                    }),
                 this.counter().speed
             );
         }

@@ -12,12 +12,19 @@ An Angular package for displaying a circle countdown fully configurable.
 |---------|---------|
 | 16.x.x  | 1.0.3   |
 | 17.x.x  | 2.0.0   |
+| 18.x.x  | 18.0.0  |
 
 ## Installation
 
 ### Install This Library
 
 `$ npm install ng-circle-countdown --save`
+
+### Install This Library
+
+To prevent timer from tab throttling, install the peer dependancy [worker-timers](https://github.com/chrisguttandin/worker-timers) :
+
+`$ npm install worker-timers --save`
 
 ## Usage
 
