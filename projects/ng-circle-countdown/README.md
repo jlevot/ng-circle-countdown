@@ -12,7 +12,7 @@ An Angular package for displaying a circle countdown fully configurable.
 |---------|---------|
 | 16.x.x  | 1.0.3   |
 | 17.x.x  | 2.0.0   |
-| 18.x.x  | 18.0.0  |
+| 18.x.x  | 3.0.0   |
 
 ## Installation
 
