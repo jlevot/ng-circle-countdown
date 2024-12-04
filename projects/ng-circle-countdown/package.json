@@ -1,9 +1,9 @@
 {
     "name": "ng-circle-countdown",
-    "version": "18.0.1",
+    "version": "19.0.0",
     "peerDependencies": {
-        "@angular/common": ">=16 <19",
-        "@angular/core": ">=16 <19",
+        "@angular/common": ">=18 <20",
+        "@angular/core": ">=18 <20",
         "worker-timers": ">=8.0.0"
     },
     "repository": {
@@ -23,6 +23,7 @@
         "angular 16",
         "angular 17",
         "angular 18",
+        "angular 19",
         "ng-circle-countdown",
         "counter",
         "countdown",

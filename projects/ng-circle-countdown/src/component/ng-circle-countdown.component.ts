@@ -11,9 +11,8 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector: 'ng-circle-countdown',
     templateUrl: 'ng-circle-countdown.component.html',
-    styleUrls: [ 'ng-circle-countdown.component.scss' ],
-    standalone: true,
-    imports: [ CommonModule, FormatTimePipe ]
+    styleUrls: ['ng-circle-countdown.component.scss'],
+    imports: [CommonModule, FormatTimePipe]
 })
 
 export class CircleCountdownComponent {

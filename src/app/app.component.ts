@@ -7,9 +7,8 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: [ './app.component.scss' ],
-    standalone: true,
-    imports: [ CommonModule, CircleCountdownComponent ]
+    styleUrls: ['./app.component.scss'],
+    imports: [CommonModule, CircleCountdownComponent]
 })
 export class AppComponent {
     protected countdownService = inject(CountdownService);
