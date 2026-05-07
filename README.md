@@ -15,6 +15,7 @@ An Angular package for displaying a circle countdown fully configurable.
 | 18.x.x  |
 | 19.x.x  |
 | 20.x.x  |
+| 21.x.x  |
 
 ## Installation
 
