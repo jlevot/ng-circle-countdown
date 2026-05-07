@@ -1,12 +1,12 @@
-import { Component, computed, ContentChild, effect, inject, input, InputSignal, Signal, TemplateRef } from '@angular/core';
-import { CountdownService } from '../services/countdown.service';
-import { SvgUtils } from '../utils/svg-utils';
-import { PathOptions } from '../model/path-options.model';
-import { CountDown } from '../model/countdown';
-import { CountDownData } from '../model/countdown-data';
-import { RotationType } from '../model/rotation-type';
-import { FormatTimePipe } from '../pipe/name.pipe';
-import { CommonModule } from '@angular/common';
+import {Component, computed, ContentChild, effect, inject, input, InputSignal, output, OutputEmitterRef, Signal, TemplateRef} from '@angular/core';
+import {CountdownService} from '../services/countdown.service';
+import {SvgUtils} from '../utils/svg-utils';
+import {PathOptions} from '../model/path-options.model';
+import {CountDown} from '../model/countdown';
+import {CountDownData} from '../model/countdown-data';
+import {RotationType} from '../model/rotation-type';
+import {FormatTimePipe} from '../pipe/name.pipe';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'ng-circle-countdown',
@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 })
 
 export class CircleCountdownComponent {
+    readonly countdownCompleted: OutputEmitterRef<void> = output<void>()
+
     @ContentChild('counter')
     // @ts-ignore
     public counterTemplate: TemplateRef<any> | null;
@@ -41,10 +43,13 @@ export class CircleCountdownComponent {
     public countDown: Signal<CountDown> = this.countdownService.getCounter();
     public countDownData: Signal<CountDownData> = computed(() => this.getCountDownData(this.countDown().remainingTime));
 
+    public isCompleted: Signal<boolean> = computed(() => this.countDown().isCompleted)
+
     constructor() {
         effect(() => {
             if (this.duration()) this.countdownService.setRemainingTime(this.duration());
-        }, { allowSignalWrites: true });
+            if (this.isCompleted()) this.countdownCompleted.emit();
+        });
     }
 
     public start(): void {
@@ -81,7 +86,7 @@ export class CircleCountdownComponent {
         const currentDuration = this.colorsTime()[currentColorIndex] - this.colorsTime()[currentColorIndex + 1];
         const startColorRGB = SvgUtils.getRGB(this.colors()[currentColorIndex]);
         const endColorRGB = SvgUtils.getRGB(this.colors()[(currentColorIndex + 1 <= this.colors().length - 1) ? currentColorIndex + 1 : this.colors().length - 1]);
-        return `rgb(${ startColorRGB.map((color: any, index: any) =>
-            SvgUtils.linearEase(currentTime, color, endColorRGB[index] - color, currentDuration)).join(',') })`;
+        return `rgb(${startColorRGB.map((color: any, index: any) =>
+            SvgUtils.linearEase(currentTime, color, endColorRGB[index] - color, currentDuration)).join(',')})`;
     }
 }

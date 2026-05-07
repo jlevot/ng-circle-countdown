@@ -1,8 +1,8 @@
-import { Component, computed, effect, inject, Signal } from '@angular/core';
-import { CountdownService } from '../../projects/ng-circle-countdown/src/services/countdown.service';
-import { CountDown } from '../../projects/ng-circle-countdown/src/model/countdown';
-import { CircleCountdownComponent } from '../../projects/ng-circle-countdown/src/component/ng-circle-countdown.component';
-import { CommonModule } from '@angular/common';
+import {Component, computed, inject, Signal} from '@angular/core';
+import {CountdownService} from '../../projects/ng-circle-countdown/src/services/countdown.service';
+import {CountDown} from '../../projects/ng-circle-countdown/src/model/countdown';
+import {CircleCountdownComponent} from '../../projects/ng-circle-countdown/src/component/ng-circle-countdown.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent {
     public countDown: Signal<CountDown> = this.countdownService.getCounter();
     public isCompleted: Signal<boolean> = computed(() => this.countDown().isCompleted);
 
-    completed = effect(() => {
+    checkCountdownState(): void {
         console.log(this.isCompleted());
-    })
+    }
 }
